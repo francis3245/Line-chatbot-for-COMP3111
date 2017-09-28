@@ -43,14 +43,86 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import com.example.bot.spring.DatabaseEngine;
+import com.example.bot.spring.SQLDatabaseEngine;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class})
 public class KitchenSinkTester {
 	@Autowired
-	private DatabaseEngine databaseEngine;
+	//private DatabaseEngine databaseEngine;
+	private SQLDatabaseEngine sqldatabaseEngine;
 	
+	@Test
+	public void SQLTest() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqldatabaseEngine.search("Who are you?");
+		}catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("I am a chatBot");
+		
+	}
+	
+	@Test
+	public void SQLTest2() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqldatabaseEngine.search("Do you know how to use Line?");
+		}catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Kind of");
+		
+	}
+	
+	@Test
+	public void SQLTest3() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqldatabaseEngine.search("Who made you?");
+		}catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("cnlauab");
+		
+	}
+	
+	@Test
+	public void SQLTest4() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqldatabaseEngine.search("Are you hungry?");
+		}catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("No");
+		
+	}
+	
+	@Test
+	public void SQLTest5() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqldatabaseEngine.search("You are handsome");
+		}catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Thanks");
+		
+	}
+	/**
 	@Test
 	public void testNotFound() throws Exception {
 		boolean thrown = false;
@@ -125,5 +197,5 @@ public class KitchenSinkTester {
 		}
 		assertThat(!thrown).isEqualTo(true);
 		assertThat(result).isEqualTo("This is absolute good grade for good student. And I am sure you are!");
-	}
+	}**/
 }
